@@ -1,0 +1,58 @@
+<Procedure title="Cough or Difficulty Breathing" author="Partners For Care">
+
+  <!--Procedure Start --> 
+  <Page>
+    <Element type="MULTI_SELECT" id="difficultyBreathingSigns"
+      concept="DIFFICULTY BREATHING SIGNS"
+      question="Select If Present:" answer=""
+      choices="Known Asthmatic,Wheezing,Difficulty In Breathing,Cough Greater Than 2/52,Chest Pains,Running Nose,Cough Less Than 2/52,Nasal Congestion,Sore Throat,Ear Discharge,Fever,Other Complaints Related to Respiratory System" />
+  </Page>
+
+  <Page>
+    <ShowIf>
+      <Criteria type="EQUALS" id="difficultyBreathingSigns" value="Cough Greater Than 2/52"/>
+    </ShowIf>
+    <Element type="RADIO" id="cough252details" 
+        concept="COUGH GREATER THAN 2/52 DETAILS" 
+        question="Select one of the ff:" answers="" choices="Dry,Wet,Productive" />
+  </Page>
+
+  <Page>
+    <ShowIf>
+        <and>
+            <Criteria type="EQUALS" id="difficultyBreathingSigns" value="Cough Greater Than 2/52"/>
+            <Criteria type="EQUALS" id="cough252details" value="Productive"/>
+        </and>
+    </ShowIf>
+    <Element type="MULTI_SELECT" id="productiveCoughQual" 
+            concept="PRODUCTIVE COUGH QUAL" question="Select all that apply:"
+            answer="" choices="Yellow,White,Green,Red(Blood),Pink,Black,Clear,Other"/>
+  </Page>
+
+  <Page>
+      <ShowIf>
+          <Criteria type="EQUALS" id="difficultyBreathingSigns" value="Chest Pains"/>
+      </ShowIf>
+      <Element type="ENTRY" id="chestPainDescription"
+              concept="CHEST PAIN DESCRIPTION" question="What does it feel like?" anwer=""/>
+      <Element type="RADIO" id="chestPainQual"
+              concept="CHEST PAIN QUAL" question="What does it feel like?" anwer=""
+              choices="Sharp,Dull,Crushing"/>
+      <Element type="ENTRY" id="chestPainLoc"
+              concept="CHEST PAIN LOC" question="Does it travel anywhere?" anwer=""/>
+  </Page>
+
+  <!-- TODO: Add to CONCEPTS database -->
+  <Page>
+    <Element type="ENTRY" id="duration" 
+      concept="COMPLAINT DURATION" 
+      numeric="DIALPAD"
+      question="Enter Complaint Duration in Days:" answer=""/>
+  </Page>
+  <Page>
+    <Element type="GPS" id="gps"
+        concept="GPS"
+        question="Record Your Position" answer=""/>
+  </Page>
+
+</Procedure>

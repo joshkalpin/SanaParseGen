@@ -1,0 +1,69 @@
+<Procedure title="Gastrointestinal" author="Partners For Care">
+
+    <Page>
+        <Element type="MULTI_SELECT" id="gastrointestinal"
+            concept="GASTROINTESTINAL"
+            question="Enter if present:"
+            answer=""
+            choices="Diarrhea,Heart Burn,Abdominal Pains,Vomiting,Changes in Eating or Drinking,Back Pain,Nausea,Yellow Skin or Eyes,Other" />
+    </Page>
+
+    <Page>
+        <ShowIf>
+            <Criteria type="EQUALS" id="gastrointestinal" value="Diarrhea"/>
+        </ShowIf>
+        <Element type="SELECT"
+            concept="DIARRHEA COLOR"
+            question="Select which applies:"
+            answer=""
+            choices="Greenish,Yellowish,White,Mucoid,Red or Bloody,Others" />
+        <Element type="ENTRY"
+            concept="DIARRHEA TIMES"
+            question="How many times?"
+            answer="" />
+    </Page>
+
+    <Page>
+        <ShowIf>
+            <Criteria type="EQUALS" id="gastrointestinal" value="Abdominal Pains"/>
+        </ShowIf>
+        <Element type="SELECT"
+            concept="ABDOMINAL PAINS"
+            question="Select which applies:"
+            answer=""
+            choices="Generalized,Localized,Flank Pains" />
+    </Page>
+
+    <Page>
+        <ShowIf>
+            <Criteria type="EQUALS" id="gastrointestinal" value="Vomiting"/>
+        </ShowIf>
+        <Element type="ENTRY"
+            concept="VOMITING DURATION"
+            question="How long has the patient been vomiting?"
+            answer="" />
+        <Element type="SELECT"
+            concept="VOMITING TIME"
+            question="When does it occur?"
+            answer=""
+            choices="After cough,After meal" />
+        <Element type="ENTRY"
+            concept="COMMENTS"
+            question="Other comments:"
+            answer="" />
+    </Page>
+
+    <Page>
+        <Element type="ENTRY" id="duration" 
+                concept="COMPLAINT DURATION" 
+                numeric="DIALPAD"
+                question="Enter Complaint Duration in Days:" answer=""/>
+    </Page>
+
+    <Page>
+        <Element type="GPS" id="gps"
+                concept="GPS"
+                question="Record Your Position" answer=""/>
+    </Page>
+
+</Procedure>

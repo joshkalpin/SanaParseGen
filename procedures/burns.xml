@@ -1,0 +1,33 @@
+<Procedure title="Burns" author="Partners For Care">
+
+  <!--Procedure Start --> 
+  <!-- TODO: Add to CONCEPTS database -->
+  <Page>
+    <Element type="MULTI_SELECT" id="burns" 
+      concept="BURNS" 
+      question="Select One or More of the Following:"
+      answer=""
+      choices="On the head,On the chest,Loins,Inhalation burns,Chemical,In an enclosure,Patient Unconscious,Epileptic Patient, Diabetic Patient"/>
+  </Page>
+
+  <!-- TODO: Add to CONCEPTS database -->
+  <Page>
+    <Element type="ENTRY" id="duration" 
+      concept="COMPLAINT DURATION" 
+      numeric="DIALPAD"
+      question="Enter Complaint Duration in Days:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="ENTRY" id="comments" 
+      concept="COMMENTS" 
+      question="Other comments:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="PICTURE" id="picture" 
+      concept="COMPLAINT PICTURE" 
+      question="Add a Picture:" answer=""/>
+  </Page>
+
+</Procedure>

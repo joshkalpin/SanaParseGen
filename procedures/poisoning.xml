@@ -1,0 +1,31 @@
+<Procedure title="Poisoning" author="Partners For Care">
+
+  <!--Procedure Start --> 
+  <Page>
+    <Element type="RADIO" id="poisoning" 
+      concept="POISONING" 
+      question="Patient Poisoned With:"
+      answer=""
+      choices="Paraffin,Local brew and turning blind, Organophosphate (ratrat),Acid,Drugs,Other"/>
+  </Page>
+
+  <Page>
+    <Element type="ENTRY" id="duration" 
+      concept="COMPLAINT DURATION" 
+      numeric="DIALPAD"
+      question="Enter Complaint Duration in Days:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="ENTRY" id="comments" 
+      concept="COMMENTS" 
+      question="Other comments:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="PICTURE" id="picture" 
+      concept="COMPLAINT PICTURE" 
+      question="Add a Picture:" answer=""/>
+  </Page>
+
+</Procedure>

@@ -1,0 +1,32 @@
+<Procedure title="Diarrhea" author="Partners For Care">
+
+  <!--Procedure Start --> 
+  <Page>
+    <Element type="MULTI_SELECT" id="diarrhea" 
+      concept="DIARRHEA" 
+      question="Select if Present:" 
+      answer=""
+      choices="Bloody,Mucoid"/>
+  </Page>
+
+  <!-- TODO: Add to CONCEPTS database -->
+  <Page>
+    <Element type="ENTRY" id="duration" 
+      concept="COMPLAINT DURATION" 
+      numeric="DIALPAD"
+      question="Enter Complaint Duration in Days:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="ENTRY" id="comments" 
+      concept="COMMENTS" 
+      question="Other comments:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="PICTURE" id="picture" 
+      concept="PICTURE" 
+      question="Add a Picture:" answer=""/>
+  </Page>
+
+</Procedure>

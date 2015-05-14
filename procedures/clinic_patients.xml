@@ -1,0 +1,37 @@
+<Procedure title="Clinic Patients" author="Partners For Care">
+
+  <Page>
+    <Element type="RADIO" id="diabetic"
+        concept="DIABETIC"
+        question="Are you diabetic?"
+        answer=""
+        choices="Yes,No"/>
+  </Page>
+
+  <Page>
+    <ShowIf>
+      <Criteria type="EQUALS" id="diabetic" value="Yes"/>
+    </ShowIf>
+    <Element type="ENTRY" id="bloodGlucose"
+        concept="BLOOD GLUCOSE"
+        numeric="DIALPAD"
+        question="Enter the Patient's Blood Glucose:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="ENTRY" id="chiefComplaint" 
+      concept="CHIEF COMPLAINT" 
+      question="Enter Patient's Chief Complaint:" answer=""/>
+    <Element type="ENTRY" id="duration" 
+      concept="COMPLAINT DURATION" 
+      numeric="DIALPAD"
+      question="Enter Complaint Duration in Days:" answer=""/>
+  </Page>
+
+  <Page>
+    <Element type="GPS" id="gps"
+        concept="GPS"
+        question="Record Your Position" answer=""/>
+  </Page>
+
+</Procedure>

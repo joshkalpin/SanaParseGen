@@ -1,0 +1,48 @@
+<Procedure title="Skin" author="Partners For Care">
+
+  <!--Procedure Start --> 
+  <Page>
+    <Element type="SELECT" id="1" 
+      concept="SKIN SYMPTOMS" 
+      question="What are the symptoms?" 
+	  answer=""
+	  choices="Rashes,Lumps,Itching,Dryness,Color changes,Hair and nail changes,Burns,Ease of bruising,Ease of bleeding,Wounds,Other complaints"/>
+  </Page>
+  
+  <Page>
+		<ShowIf>
+			<Criteria type="EQUALS" id="1" value="Burns"/>
+		</ShowIf>
+		<Element type="RADIO" 
+		concept="DRAINAGE" id="2" 
+		question="Drainage?" 
+		answer=""
+		choices="Yes,No"/>
+  </Page>
+  
+  <Page>
+		<ShowIf>
+			<Criteria type="EQUALS" id="1" value="Other complaints"/>
+		</ShowIf>
+		<Element type="ENTRY" 
+		concept="OTHER COMPLAINTS" id="4" 
+		question="Are there any other complaints?"
+		answer=""/>  
+  </Page>
+
+
+  <Page>
+    <Element type="ENTRY" id="5" 
+      concept="COMPLAINT DURATION" 
+      question="Enter Complaint Duration in Days:"
+	  answer=""/>
+  </Page>
+  
+  <!-- Verify that this works by looking at sana code -->
+  <Page>
+    <Element type="GPS" id="gps"
+        concept="GPS"
+        question="Record Your Position" answer=""/>
+  </Page>
+  
+</Procedure>
