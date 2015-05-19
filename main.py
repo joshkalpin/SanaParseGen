@@ -1,5 +1,6 @@
 from xml.etree import ElementTree
 from parser import *
+from generator import *
 import sys
 
 
@@ -14,6 +15,12 @@ def main():
         tree = ElementTree.parse(args[1])
         procedureElement = tree.getroot()
         procedure = Parser.parseProcedure(procedureElement)
+
+        generatedProc = Generator.generateProcedure(procedure)
+        with open('out.xml', 'w') as outfile:
+            outfile.write(generatedProc)
+
+        print generatedProc
 
     except IOError:
         print 'ERROR: Invalid filename'

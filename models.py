@@ -1,10 +1,19 @@
 class Element(object):
-    def __init__(self, eleType, eleId, concept, question, answer=None):
+    def __init__(self, eleType, eleId, concept, question, answer):
         self.eleType = eleType
         self.eleId = eleId
         self.concept = concept
         self.question = question
         self.answer = answer
+
+    def generatePropertiesDictionary(self):
+        return {
+            'type': self.eleType,
+            'id': self.eleId,
+            'concept': self.concept,
+            'question': self.question,
+            'answer': self.answer
+        }
 
     @staticmethod
     def _validateAttributes(attrib):
@@ -20,24 +29,27 @@ class Element(object):
         if 'question' not in attrib:
             raise Exception('Element', 'question')
 
+        if 'answer' not in attrib:
+            raise Exception('Element', 'answer')
+
     @staticmethod
     def createElement(attrib):
         Element._validateAttributes(attrib)
 
         if attrib['type'] == 'MULTI_SELECT':
-            MultiSelectElement._createElement(attrib)
-        elif attrib['type'] == 'ENTRY':
-            EntryElement._createElement(attrib)
-        elif attrib['type'] == 'PICTURE':
-            PictureElement._createElement(attrib)
-        elif attrib['type'] == 'GPS':
-            GPSElement._createElement(attrib)
-        else:
-            raise Exception('Element', 'type')
+            return MultiSelectElement._createElement(attrib)
+        if attrib['type'] == 'ENTRY':
+            return EntryElement._createElement(attrib)
+        if attrib['type'] == 'PICTURE':
+            return PictureElement._createElement(attrib)
+        if attrib['type'] == 'GPS':
+            return GPSElement._createElement(attrib)
+
+        raise Exception('Element', 'type')
 
 
 class MultiSelectElement(Element):
-    def __init__(self, eleId, concept, question, choices, answer=None):
+    def __init__(self, eleId, concept, question, choices, answer):
         super(MultiSelectElement, self).__init__(
             eleType='MULTI_SELECT',
             eleId=eleId,
@@ -47,6 +59,12 @@ class MultiSelectElement(Element):
         )
 
         self.choices = choices
+
+    def generatePropertiesDictionary(self):
+        propDict = super(MultiSelectElement, self).generatePropertiesDictionary()
+        propDict['choices'] = self.choices
+
+        return propDict
 
     @staticmethod
     def _validateAttributes(attrib):
@@ -61,7 +79,7 @@ class MultiSelectElement(Element):
         concept = attrib['concept']
         question = attrib['question']
         choices = attrib['choices']
-        answer = attrib['answer'] if 'answer' in attrib else None
+        answer = attrib['answer']
 
         return MultiSelectElement(
             eleId=eleId,
@@ -73,7 +91,7 @@ class MultiSelectElement(Element):
 
 
 class EntryElement(Element):
-    def __init__(self, eleId, concept, question, answer=None, numeric=None):
+    def __init__(self, eleId, concept, question, answer, numeric=None):
         super(EntryElement, self).__init__(
             eleType='ENTRY',
             eleId=eleId,
@@ -83,12 +101,19 @@ class EntryElement(Element):
         )
         self.numeric = numeric
 
+    def generatePropertiesDictionary(self):
+        propDict = super(EntryElement, self).generatePropertiesDictionary()
+        if self.numeric is not None:
+            propDict['numeric'] = self.numeric
+
+        return propDict
+
     @staticmethod
     def _createElement(attrib):
         eleId = attrib['id']
         concept = attrib['concept']
         question = attrib['question']
-        answer = attrib['answer'] if 'answer' in attrib else None
+        answer = attrib['answer']
         numeric = attrib['numeric'] if 'numeric' in attrib else None
 
         return EntryElement(
@@ -101,7 +126,7 @@ class EntryElement(Element):
 
 
 class PictureElement(Element):
-    def __init__(self, eleId, concept, question, answer=''):
+    def __init__(self, eleId, concept, question, answer):
         super(PictureElement, self).__init__(
             eleType='PICTURE',
             eleId=eleId,
@@ -115,7 +140,7 @@ class PictureElement(Element):
         eleId = attrib['id']
         concept = attrib['concept']
         question = attrib['question']
-        answer = attrib['answer'] if 'answer' in attrib else None
+        answer = attrib['answer']
 
         return PictureElement(
             eleId=eleId,
@@ -126,7 +151,7 @@ class PictureElement(Element):
 
 
 class GPSElement(Element):
-    def __init__(self, eleId, concept, question, answer=''):
+    def __init__(self, eleId, concept, question, answer):
         super(GPSElement, self).__init__(
             eleType='GPS',
             eleId=eleId,
@@ -140,7 +165,7 @@ class GPSElement(Element):
         eleId = attrib['id']
         concept = attrib['concept']
         question = attrib['question']
-        answer = attrib['answer'] if 'answer' in attrib else None
+        answer = attrib['answer']
 
         return PictureElement(
             eleId=eleId,
@@ -151,13 +176,11 @@ class GPSElement(Element):
 
 
 class Page(object):
-
     def __init__(self):
         self.elements = []
 
 
 class Procedure(object):
-
     def __init__(self, title, author):
         self.title = title
         self.author = author
@@ -165,6 +188,12 @@ class Procedure(object):
 
     def __contains__(self, page):
         return page in self.pages
+
+    def generatePropertiesDictionary(self):
+        return {
+            'title': self.title,
+            'author': self.author
+        }
 
     @staticmethod
     def createProcedure(attrib):
