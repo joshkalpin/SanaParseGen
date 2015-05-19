@@ -12,9 +12,9 @@ class Generator:
         return reparsed.toprettyxml(indent="  ")
 
     @staticmethod
-    def generateProcedure(procedure):
+    def generate_procedure(procedure):
         procedureElement = ElementTree.Element('Procedure')
-        procedureElement.attrib = procedure.generatePropertiesDictionary()
+        procedureElement.attrib = procedure.generate_properties_dict()
 
         for page in procedure.pages:
             pageElement = ElementTree.SubElement(procedureElement, 'Page')
@@ -23,7 +23,7 @@ class Generator:
                 ElementTree.SubElement(
                     pageElement,
                     'Element',
-                    element.generatePropertiesDictionary()
+                    element.generate_properties_dict()
                 )
 
         return Generator._prettify(procedureElement)

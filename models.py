@@ -6,7 +6,7 @@ class Element(object):
         self.question = question
         self.answer = answer
 
-    def generatePropertiesDictionary(self):
+    def generate_properties_dict(self):
         return {
             'type': self.eleType,
             'id': self.eleId,
@@ -16,7 +16,7 @@ class Element(object):
         }
 
     @staticmethod
-    def _validateAttributes(attrib):
+    def _validate_attributes(attrib):
         if 'type' not in attrib:
             raise Exception('Element', 'type')
 
@@ -33,17 +33,17 @@ class Element(object):
             raise Exception('Element', 'answer')
 
     @staticmethod
-    def createElement(attrib):
-        Element._validateAttributes(attrib)
+    def create_element(attrib):
+        Element._validate_attributes(attrib)
 
         if attrib['type'] == 'MULTI_SELECT':
-            return MultiSelectElement._createElement(attrib)
+            return MultiSelectElement._create_element(attrib)
         if attrib['type'] == 'ENTRY':
-            return EntryElement._createElement(attrib)
+            return EntryElement._create_element(attrib)
         if attrib['type'] == 'PICTURE':
-            return PictureElement._createElement(attrib)
+            return PictureElement._create_element(attrib)
         if attrib['type'] == 'GPS':
-            return GPSElement._createElement(attrib)
+            return GPSElement._create_element(attrib)
 
         raise Exception('Element', 'type')
 
@@ -60,20 +60,20 @@ class MultiSelectElement(Element):
 
         self.choices = choices
 
-    def generatePropertiesDictionary(self):
-        propDict = super(MultiSelectElement, self).generatePropertiesDictionary()
+    def generate_properties_dict(self):
+        propDict = super(MultiSelectElement, self).generate_properties_dict()
         propDict['choices'] = self.choices
 
         return propDict
 
     @staticmethod
-    def _validateAttributes(attrib):
+    def _validate_attributes(attrib):
         if 'choices' not in attrib:
             raise Exception('MultiSelectElement', 'choices')
 
     @staticmethod
-    def _createElement(attrib):
-        MultiSelectElement._validateAttributes(attrib)
+    def _create_element(attrib):
+        MultiSelectElement._validate_attributes(attrib)
 
         eleId = attrib['id']
         concept = attrib['concept']
@@ -101,15 +101,15 @@ class EntryElement(Element):
         )
         self.numeric = numeric
 
-    def generatePropertiesDictionary(self):
-        propDict = super(EntryElement, self).generatePropertiesDictionary()
+    def generate_properties_dict(self):
+        propDict = super(EntryElement, self).generate_properties_dict()
         if self.numeric is not None:
             propDict['numeric'] = self.numeric
 
         return propDict
 
     @staticmethod
-    def _createElement(attrib):
+    def _create_element(attrib):
         eleId = attrib['id']
         concept = attrib['concept']
         question = attrib['question']
@@ -136,7 +136,7 @@ class PictureElement(Element):
         )
 
     @staticmethod
-    def _createElement(attrib):
+    def _create_element(attrib):
         eleId = attrib['id']
         concept = attrib['concept']
         question = attrib['question']
@@ -161,7 +161,7 @@ class GPSElement(Element):
         )
 
     @staticmethod
-    def _createElement(attrib):
+    def _create_element(attrib):
         eleId = attrib['id']
         concept = attrib['concept']
         question = attrib['question']
@@ -189,14 +189,14 @@ class Procedure(object):
     def __contains__(self, page):
         return page in self.pages
 
-    def generatePropertiesDictionary(self):
+    def generate_properties_dict(self):
         return {
             'title': self.title,
             'author': self.author
         }
 
     @staticmethod
-    def createProcedure(attrib):
+    def create_procedure(attrib):
         if 'title' not in attrib:
             raise Exception('Procedure', 'title')
 

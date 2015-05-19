@@ -3,16 +3,16 @@ from models import *
 
 class Parser(object):
     @staticmethod
-    def parseElement(elementElement):
+    def parse_element(elementElement):
         if elementElement.tag != 'Element':
             raise Exception('ElementElement', 'tag')
 
-        element = Element.createElement(elementElement.attrib)
+        element = Element.create_element(elementElement.attrib)
 
         return element
 
     @staticmethod
-    def parsePage(pageElement):
+    def parse_page(pageElement):
         if pageElement.tag != 'Page':
             raise Exception('PageElement', 'tag')
 
@@ -20,7 +20,7 @@ class Parser(object):
 
         for pageChild in pageElement:
             if pageChild.tag == 'Element':
-                element = Parser.parseElement(pageChild)
+                element = Parser.parse_element(pageChild)
                 page.elements.append(element)
             else:
                 raise Exception('Page', 'child')
@@ -28,14 +28,14 @@ class Parser(object):
         return page
 
     @staticmethod
-    def parseProcedure(procedureElement):
+    def parse_procedure(procedureElement):
         if procedureElement.tag != 'Procedure':
             raise Exception('ProcedureElement', 'tag')
 
-        procedure = Procedure.createProcedure(procedureElement.attrib)
+        procedure = Procedure.create_procedure(procedureElement.attrib)
 
         for pageElement in procedureElement:
-            page = Parser.parsePage(pageElement)
+            page = Parser.parse_page(pageElement)
             procedure.pages.append(page)
 
         return procedure

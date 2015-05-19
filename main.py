@@ -14,9 +14,9 @@ def main():
     try:
         tree = ElementTree.parse(args[1])
         procedureElement = tree.getroot()
-        procedure = Parser.parseProcedure(procedureElement)
+        procedure = Parser.parse_procedure(procedureElement)
 
-        generatedProc = Generator.generateProcedure(procedure)
+        generatedProc = Generator.generate_procedure(procedure)
         with open('out.xml', 'w') as outfile:
             outfile.write(generatedProc)
 
