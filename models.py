@@ -48,10 +48,10 @@ class Element(object):
         raise Exception('Element', 'type')
 
 
-class MultiSelectElement(Element):
-    def __init__(self, eleId, concept, question, choices, answer):
-        super(MultiSelectElement, self).__init__(
-            eleType='MULTI_SELECT',
+class ChoiceElement(Element):
+    def __init__(self, eleType, eleId, concept, question, choices, answer):
+        super(ChoiceElement, self).__init__(
+            eleType=eleType,
             eleId=eleId,
             concept=concept,
             question=question,
@@ -61,7 +61,7 @@ class MultiSelectElement(Element):
         self.choices = choices
 
     def generate_properties_dict(self):
-        propDict = super(MultiSelectElement, self).generate_properties_dict()
+        propDict = super(ChoiceElement, self).generate_properties_dict()
         propDict['choices'] = self.choices
 
         return propDict
@@ -69,11 +69,23 @@ class MultiSelectElement(Element):
     @staticmethod
     def _validate_attributes(attrib):
         if 'choices' not in attrib:
-            raise Exception('MultiSelectElement', 'choices')
+            raise Exception('ChoiceElement', 'choices')
+
+
+class MultiSelectElement(ChoiceElement):
+    def __init__(self, eleId, concept, question, choices, answer):
+        super(MultiSelectElement, self).__init__(
+            eleType='MULTI_SELECT',
+            eleId=eleId,
+            concept=concept,
+            question=question,
+            choices=choices,
+            answer=answer
+        )
 
     @staticmethod
     def _create_element(attrib):
-        MultiSelectElement._validate_attributes(attrib)
+        ChoiceElement._validate_attributes(attrib)
 
         eleId = attrib['id']
         concept = attrib['concept']
